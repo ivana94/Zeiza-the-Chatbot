@@ -69,7 +69,7 @@ const loggedInRouter = (
 
         <Router history = { browserHistory }>
             <Route path = "/" component = { App } >
-                <IndexRoute component = { Default } />
+                <IndexRoute component = { Zeiza } />
             </Route>
         </Router>
 
