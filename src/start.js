@@ -6,7 +6,7 @@ import Welcome from './welcome';
 import Login from './login';
 import Register from './register';
 import App from './app';
-import Default from './default'
+import Zeiza from './zeiza'
 
 // IMPORT REDUX & REDUX MIDDLEWARE
 import { Provider } from 'react-redux';
