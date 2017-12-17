@@ -9,7 +9,7 @@ export default class Result extends React.Component {
     }
 
 	render() {
-        console.log("mmmmmm");
+        console.log("mmmmmmm");
         console.log("this state;", this.state);
 
         var userSpeechTranscription = this.props.userSpeechTranscription;

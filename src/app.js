@@ -28,13 +28,13 @@ export default class App extends React.Component {
 
 
     componentDidMount() {
-        // socket();
+        socket();
 
 
             // checkHTMLForGetUserMedia();
             //
             // // window.AudioContext = (window.AudioContext || window.webkitAudioContext);
-            // 
+            //
             // // // NAME OF MY AUDIO TAG IN INDEX.HTML
             // var player = document.getElementById('player');
             //
@@ -133,6 +133,8 @@ export default class App extends React.Component {
                 userSpeechTranscription = 'What you just said: ' + text;
                 this.updateState(userSpeechTranscription);
                 console.log("here?");
+
+                socket().emit("userAudio", { userSpeechTranscription })
 
                 console.log('Confidence: ' + e.results[0][0].confidence);
             }
