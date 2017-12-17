@@ -11,6 +11,7 @@ const compression = require('compression');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
+const apiai = require('apiai')("9dd68b051a994ea2a89b806276ec1ab1");
 
 // HASH PASSWORD
 const bcrypt = require('bcryptjs');
@@ -129,10 +130,10 @@ app.post("/register", (req, res) => {
 
             res.json({ results, success: true });
 
-        }).catch((err) => {
+        }).catch(err => {
             res.json({ success: false });
         });
-    }).catch((err) => {
+    }).catch(err => {
         res.json({ success: false });
     });
 
@@ -211,7 +212,7 @@ app.get("/logout", (req, res) => {
 
 
 
-app.get('*', function(req, res){
+app.get('*', (req, res) => {
 
     if (!req.session.user && req.url != '/welcome/') {
         res.redirect("/welcome/");
@@ -262,7 +263,27 @@ server.listen(8080, function() {
 io.on('connection', (socket) => {
 
     socket.on("userAudio", userSpeechTranscription => {
-        console.log("what you just said... in the server now!", userSpeechTranscription.userSpeechTranscription);
+
+        // CAPTURE WHAT THE USER JUST SAID IN A VAR TEXT
+        var text = userSpeechTranscription.userSpeechTranscription;
+
+        // GET REPLY FROM AI API (DIALOGFLOW)
+        let apiaiReq = apiai.textRequest(text, {
+            sessionId: APIAI_SESSION_ID
+        });
+
+        apiaiReq.on('response', (response) => {
+            let aiText = response.result.fulfillment.speech;
+            console.log("AITEXT: ", aiText);
+            socket.emit('bot reply', aiText); // Send the result back to the browser!
+        });
+
+        apiaiReq.on('error', (error) => {
+            console.log(error);
+        });
+
+        apiaiReq.end();
+
     });
 
 });
