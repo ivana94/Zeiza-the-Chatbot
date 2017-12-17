@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { socket } from './socket'
 import Zeiza from './zeiza'
+import Results from './results'
 import RecordButton from './button'
 
 
@@ -11,22 +12,32 @@ export default class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            userSpeechTranscription: "Initial userSpeechTranscription state: "
+        };
+    }
+
+    updateState(userSpeechTranscription) {
+
+        this.setState({
+            userSpeechTranscription: userSpeechTranscription
+        });
+
     }
 
 
 
     componentDidMount() {
-        socket();
+        // socket();
 
 
             checkHTMLForGetUserMedia();
 
             // window.AudioContext = (window.AudioContext || window.webkitAudioContext);
-            //
+
             // // NAME OF MY AUDIO TAG IN INDEX.HTML
             var player = document.getElementById('player');
-            //
+
             // // DEFINE ERROR CALLBACK
             var errorCallback = e => {
                 console.log('Error callback.', e);
@@ -57,9 +68,9 @@ export default class App extends React.Component {
                 filter.onaudioprocess = e => {
                     var inputBuffer = e.inputBuffer;
 
-                    socket.emit("userAudio", (inputBuffer) => {
-                        console.log("inputBuffer in view", inputBuffer);
-                    });
+                    // socket.emit("userAudio", inputBuffer => {
+                    //     console.log("inputBuffer in view", inputBuffer);
+                    // });
 
                 }
 
@@ -87,6 +98,9 @@ export default class App extends React.Component {
 
 
 
+
+
+
     handleClick() {
 
         // CHECK TO MAKE SURE SPEECH RECOGNITION IS SUPPORTED IN USER'S BROWSER
@@ -104,13 +118,18 @@ export default class App extends React.Component {
             // SPEECH RECOGNITION WILL NOT END WHEN USER STOPS SPEAKING
             recognition.continuous = true;
 
+            recognition.start();
+
 
 
             recognition.onresult = e => {
-                console.log("onresult");
+                console.log("onresult", e.results);
 
                 let last = e.results.length - 1;
                 let text = e.results[last][0].transcript;
+                console.log("USERSPEECH: ", text);
+                userSpeechTranscription = 'What you just said: ' + text + '.';
+                this.updateState(userSpeechTranscription);
 
                 console.log('Confidence: ' + e.results[0][0].confidence);
             }
@@ -120,16 +139,16 @@ export default class App extends React.Component {
 				recognition.stop();
 			}
 
-            recognition.start();
+
 
             // recognition.onerror = function(event) {
 			// 	resultText = 'Error occurred in recognition: ' + event.error;
 			// 	this.updateState(newColour, resultText);
 			// }
 
-            // recognition.onend = function() {
-            //     recognition.start();
-            // }
+            recognition.onend = function() {
+                recognition.start();
+            }
 
 
 
@@ -162,10 +181,10 @@ export default class App extends React.Component {
     render() {
 
 
-        const { first, last, bio, email, imgurl, uploaderIsVisible, bioUpdateisVisible } = this.state
+        const { first, last, bio, email, imgurl, uploaderIsVisible, bioUpdateisVisible, userSpeechTranscription } = this.state
 
         const children = React.cloneElement(this.props.children, {
-
+            userSpeechTranscription
         })
 
         if (!this.state) {
@@ -186,6 +205,7 @@ export default class App extends React.Component {
                 App
                 <Zeiza />
                 <RecordButton handleClick = {this.handleClick.bind(this)} />
+                <Results userSpeechTranscription = { this.state.userSpeechTranscription } />
             </div>
         ) // END RETURN
 

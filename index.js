@@ -261,7 +261,7 @@ server.listen(8080, function() {
 // THIS RUNS THE MOMENT SOCKET IO INITIALIZES
 io.on('connection', (socket) => {
 
-    socket.on("userAudio", (inputBuffer) => {
+    socket.on("userAudio", inputBuffer => {
         console.log("inputBuffer in server", inputBuffer);
     });
 
