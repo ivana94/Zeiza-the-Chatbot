@@ -23,28 +23,17 @@ function getSocket() {
             });
         });
 
-
-        // LISTENS FOR USER JOIN -- THIS WILL RUN WHENEVER A USER LOGS IN
-        socket.on('userJoined', (userWhoJoined) => {
-            store.dispatch(userJoined(userWhoJoined));
-        });
-
-
-        // TAKE LIST OF ONLINE USERS AND PUSH TO STATE
-        socket.on('onlineUsers', (onlineUsers) => {
-            store.dispatch(listOfOnlineUsers(onlineUsers));
-        });
-
-
-        // THIS LISTENS ON THE USERLEFT EVENT
-        socket.on("userLeft", (userWhoLeft) => {
-            store.dispatch(userLeft(userWhoLeft));
-        });
+        function synthVoice(text) {
+            const synth = window.speechSynthesis;
+            const utterance = new SpeechSynthesisUtterance();
+            utterance.text = text;
+            synth.speak(utterance);
+        }
 
 
         // LISTEN FOR THE CHATMESSAGES EVENT WHICH IS EMITTED BY THE SERVER
-        socket.on("chatMessages", (chats) => {
-            store.dispatch(displayMessages(chats));
+        socket.on('zeizaResponse', zeizaResposne => {
+            synthVoice(zeizaResposne);
         });
 
 

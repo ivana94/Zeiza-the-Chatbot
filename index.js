@@ -1,3 +1,4 @@
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////// REQUIRE MODULES & USE THEM //////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -11,6 +12,8 @@ const compression = require('compression');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
+
+// SETUP FOR DIALOGFLOW AI API
 const apiai = require('apiai')("9dd68b051a994ea2a89b806276ec1ab1");
 
 // HASH PASSWORD
@@ -250,8 +253,6 @@ app.get('*', (req, res) => {
 
 
 
-
-
 server.listen(8080, function() {
     console.log("I'm listening.");
 });
@@ -262,27 +263,30 @@ server.listen(8080, function() {
 // THIS RUNS THE MOMENT SOCKET IO INITIALIZES
 io.on('connection', (socket) => {
 
-    socket.on("userAudio", userSpeechTranscription => {
+    socket.on("userAudio", text => {
 
         // CAPTURE WHAT THE USER JUST SAID IN A VAR TEXT
-        var text = userSpeechTranscription.userSpeechTranscription;
+        var userTextToSendToAI = text.text;
+        console.log("TEXT: ", userTextToSendToAI);
 
         // GET REPLY FROM AI API (DIALOGFLOW)
-        let apiaiReq = apiai.textRequest(text, {
-            sessionId: APIAI_SESSION_ID
+        var AIReq = apiai.textRequest(userTextToSendToAI, {
+            sessionId: 1234
         });
 
-        apiaiReq.on('response', (response) => {
-            let aiText = response.result.fulfillment.speech;
-            console.log("AITEXT: ", aiText);
-            socket.emit('bot reply', aiText); // Send the result back to the browser!
+        console.log("SESSIONID: ", userTextToSendToAI);
+
+        AIReq.on('response', (response) => {
+            let zeizaResposne = response.result.fulfillment.speech;
+            console.log("AITEXT: ", zeizaResposne);
+            socket.emit('zeizaResponse', zeizaResposne);
         });
 
-        apiaiReq.on('error', (error) => {
+        AIReq.on('error', (error) => {
             console.log(error);
         });
 
-        apiaiReq.end();
+        AIReq.end();
 
     });
 

@@ -129,12 +129,10 @@ export default class App extends React.Component {
 
                 let last = e.results.length - 1;
                 let text = e.results[last][0].transcript;
-                console.log("USERSPEECH: ", text);
-                userSpeechTranscription = 'What you just said: ' + text;
+                userSpeechTranscription = 'You: ' + text;
                 this.updateState(userSpeechTranscription);
-                console.log("here?");
 
-                socket().emit("userAudio", { userSpeechTranscription })
+                socket().emit("userAudio", { text })
 
                 console.log('Confidence: ' + e.results[0][0].confidence);
             }
@@ -143,12 +141,10 @@ export default class App extends React.Component {
 				recognition.stop();
 			}
 
-
-
-            // recognition.onerror = function(event) {
-			// 	resultText = 'Error occurred in recognition: ' + event.error;
-			// 	this.updateState(newColour, resultText);
-			// }
+            recognition.onerror = e => {
+				userSpeechTranscription = 'Error occurred in recognition: ' + e.error;
+				this.updateState(userSpeechTranscription);
+			}
 
             recognition.onend = function() {
                 recognition.start();
@@ -184,12 +180,6 @@ export default class App extends React.Component {
 
     render() {
 
-
-        const { first, last, bio, email, imgurl, uploaderIsVisible, bioUpdateisVisible, userSpeechTranscription } = this.state
-
-        const children = React.cloneElement(this.props.children, {
-            userSpeechTranscription
-        })
 
         if (!this.state) {
             return (
