@@ -12,10 +12,9 @@ const compression = require('compression');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
-const secret = require("./secret.json");
 
 // SETUP FOR DIALOGFLOW AI API
-const apiai = require('apiai')(secret.apiaiKey);
+const apiai = require('apiai')("9dd68b051a994ea2a89b806276ec1ab1");
 
 // HASH PASSWORD
 const bcrypt = require('bcryptjs');
@@ -272,7 +271,7 @@ io.on('connection', (socket) => {
 
         // GET REPLY FROM AI API (DIALOGFLOW)
         var AIReq = apiai.textRequest(userTextToSendToAI, {
-            sessionId: secret.sessionId
+            sessionId: 1234
         });
 
         AIReq.on('response', (response) => {

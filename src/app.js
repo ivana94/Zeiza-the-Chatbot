@@ -5,6 +5,11 @@ import Zeiza from './zeiza'
 import Results from './results'
 import RecordButton from './button'
 
+import { displayMostRecentUserComment, displayMostRecentAIResponse } from './actions';
+
+// IMPORT STORE BECAUSE STORE HAS THE DISPATCH METHOD
+import { store } from './start';
+
 
 
 export default class App extends React.Component {
@@ -17,13 +22,13 @@ export default class App extends React.Component {
         };
     }
 
-    updateState(userSpeechTranscription) {
-
-        this.setState({
-            userSpeechTranscription: userSpeechTranscription
-        });
-
-    }
+    // updateState(userSpeechTranscription) {
+    //
+    //     this.setState({
+    //         userSpeechTranscription: userSpeechTranscription
+    //     });
+    //
+    // }
 
 
 
@@ -115,10 +120,10 @@ export default class App extends React.Component {
             recognition.lang = 'en-US';
 
             // PROCESS USER AUDIO WHILE USER IS SPEAKING
-            recognition.interimResults = true;
+            recognition.interimResults = false;
 
             // SPEECH RECOGNITION WILL NOT END WHEN USER STOPS SPEAKING
-            recognition.continuous = true;
+            recognition.continuous = false;
 
             recognition.start();
 
@@ -130,9 +135,10 @@ export default class App extends React.Component {
                 let last = e.results.length - 1;
                 let text = e.results[last][0].transcript;
                 userSpeechTranscription = 'You: ' + text;
-                this.updateState(userSpeechTranscription);
+                // this.updateState(userSpeechTranscription);
 
-                socket().emit("userAudio", { text })
+                store.dispatch(displayMostRecentUserComment(text))
+                // socket().emit("userAudio", { text })
 
                 console.log('Confidence: ' + e.results[0][0].confidence);
             }
@@ -143,7 +149,7 @@ export default class App extends React.Component {
 
             recognition.onerror = e => {
 				userSpeechTranscription = 'Error occurred in recognition: ' + e.error;
-				this.updateState(userSpeechTranscription);
+				console.log("error");
 			}
 
             recognition.onend = function() {
