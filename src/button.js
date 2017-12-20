@@ -21,7 +21,7 @@ export default class RecordButton extends React.Component {
       return (
         <div className = "container" >
 
-            <button className="RecordButton" onClick = { this.props.handleClick } >Talk to Zeiza</button>
+            
 
         </div>
       )

@@ -2,6 +2,35 @@
     margin: 0;
 }
 
-.results-zeiza {
+button {
+    border: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+.zeiza-main-img {
+    background-image: url("zeiza.png");
+}
+
+.zeiza-main-tag {
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: 100;
+    font-size: 194px;
+    margin: 0 100%;
+}
+
+.user {
+    background: aliceblue;
+    margin: 10px 30px;
+
+}
+
+.zeiza {
     color: red;
+    font-weight: bold;
+    background: lightgray;
+    margin: 10px 50%;
+    width: 100%;
 }

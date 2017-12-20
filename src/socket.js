@@ -69,7 +69,7 @@ function synthVoice(text) {
     msg.voiceURI = 'Native';
     msg.volume = 1;
     msg.rate = 1;
-    msg.lang = 'zh-CH';
+    msg.lang = 'en-IE';
 
     synth.speak(msg);
 }

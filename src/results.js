@@ -23,8 +23,6 @@ class Result extends React.Component {
 
         var message = this.props.message;
 
-        console.log("message: ", message);
-
         const listOfComments = () => {
             return message.map(msg => {
                 return (
@@ -32,18 +30,6 @@ class Result extends React.Component {
                 )
             })
         }
-
-        const listOfZeizaResponses = () => {
-            return zeizaResponse.map(zeiza => {
-                return (
-                    <div>
-                        { zeiza }
-                    </div>
-                )
-            })
-        }
-
-        console.log("this userComment;", listOfComments);
 
 
 
@@ -67,36 +53,3 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps)(Result);
-
-
-
-
-
-
-
-
-
-
-
-
-
-// [
-//     {
-//         sender: 'user',
-//         message: "yo"
-//     },
-//
-//     {
-//         sender: 'computer',
-//         message: "hi"
-//     }
-// ]
-//
-// // put in 1 array but an property of who the sender is
-//
-//
-// messages.map(msg => {
-//     return (
-//         <div className = { msg.sender}>{msg.message}</div>
-//     )
-// })

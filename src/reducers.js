@@ -7,8 +7,6 @@ export default function reducer(state = {}, action) {
 ////////////////////////////////////////////////////////////////////////////////
 // PUSH USER'S NEWEST COMMENT TO STATE
     if (action.type == 'GET_MOST_RECENT_USER_COMMENT') {
-        console.log("GET_MOST_RECENT_USER_COMMENT: ", action.data);
-
 
         if (!state.message) {
             state = Object.assign({}, state, {
@@ -26,8 +24,6 @@ export default function reducer(state = {}, action) {
 
     // PUSH ZEIZA'S LATEST RESPONSE TO STATE
     if (action.type == 'GET_MOST_RECENT_AI_RESPONSE') {
-        console.log("GET_MOST_RECENT_AI_RESPONSE: ", action.data[0]);
-
 
         state = Object.assign({}, state, {
             message: [ ...state.message, action.data[0] ]
