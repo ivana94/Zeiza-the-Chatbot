@@ -48,6 +48,12 @@ function getSocket() {
                 document.querySelector(".zeiza-main-tag").style.color = arg;
                 document.querySelector(".messages").style.color = arg;
                 document.querySelector(".zeiza").style.color = arg;
+            } else if (type == 'fadeText') {
+                document.querySelector(".zeiza-main-tag").style.opacity = "0";
+            } else if (type == 'bringBackText') {
+                document.querySelector(".zeiza-main-tag").style.opacity = "1";
+            } else if (type == 'changeOpacity') {
+                document.querySelector(".zeiza-main-tag").style.opacity = arg;
             }
 
         });

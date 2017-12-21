@@ -284,15 +284,21 @@ io.on('connection', (socket) => {
             // KC = EVERY KEY IN KNOWNCOMMANDS ARR
 
             kc.variations.forEach(variation => {
+                var arg;
 
                 // VARIATION == "CHANGE BACKGROUND COLOUR" ETC
 
                 kc.validArguments.forEach(argument => {
 
                     if (!Number.isInteger(argument)) {
-                        var arg = argument.toLowerCase();
+
+                        if (argument > 0 && argument < 1) {
+                            arg = argument;
+                        } else {
+                            arg = argument.toLowerCase();
+                        }
                     } else {
-                        var arg = argument;
+                        arg = argument;
                     }
 
                     if (utterance.indexOf(variation) > -1 && utterance.indexOf(arg) > -1) {

@@ -11,7 +11,16 @@ class Result extends React.Component {
         this.state = {};
     }
 
+    scrollToBottom() {
+        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    }
+
+    componentDidMount() {
+      this.scrollToBottom();
+    }
+
     componentDidUpdate() {
+        this.scrollToBottom();
 
         if (this.elem) {
             this.elem.scrollTop = this.elem.scrollHeight - this.elem.clientHeight;
@@ -36,6 +45,9 @@ class Result extends React.Component {
 		return (
 			<div className = "result-text-div">
 				<span className = "messages">{ message && listOfComments() }</span>
+                <div style = {{ float: "left", clear: "both" }}
+                ref={ el => { this.messagesEnd = el; } }>
+        </div>
 			</div>
 		)
 	}

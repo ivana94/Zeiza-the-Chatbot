@@ -205,163 +205,204 @@ var knownCommands = [
 
 
 
-    //
-    //
-    //
-    // {
-    //     name: 'changeFontColor',
-    //
-    //     variations: [
-    //         'change font colour',
-    //         'make font colour',
-    //         'update font colour',
-    //         'change the colour of the font',
-    //         "make the font's colour",
-    //         "change the font's colour",
-    //         "update the font's colour",
-    //         'update the font colour',
-    //         'change the font colour',
-    //         'make the font colour'
-    //     ],
-    //
-    //     validArguments: [
-    //         'aqua', 'black', 'blue', 'fuchsia', 'grey', 'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'light grey', 'crimson', 'salmon'
-    //     ],
-    //
-    //     handler(text, variations, argument, socket) {
-    //         let col = argument;
-    //
-    //         var args = text.replace(variations, '');
-    //
-    //         this.validArguments.some(col => {
-    //
-    //             if (args.indexOf(col) > -1) {
-    //                 return col;
-    //             } else {
-    //                 let zeizaResponse = "I don't recognize that color";
-    //                 return zeizaResponse;
-    //             }
-    //
-    //         });
-    //
-    //         let data = {
-    //             type: "changeFontColor",
-    //             col
-    //         };
-    //
-    //         socket.emit("zeizaCommand", data);
-    //
-    //     }
-    // }, // END CHANGEBG OBJ
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    // {
-    //     name: 'changeFontSize',
-    //
-    //     variations: [
-    //         'change font size',
-    //         'make font size',
-    //         'update font size',
-    //         'change the size of the font',
-    //         "make the font's size",
-    //         "change the font's size",
-    //         "update the font's size",
-    //         'update the font size',
-    //         'change the font size',
-    //         'make the font size'
-    //     ],
-    //
-    //     validArguments: arguments,
-    //
-    //     handler(text, variations, argument, socket) {
-    //         let col = argument;
-    //
-    //         var args = text.replace(variations, '');
-    //
-    //         this.validArguments.some(col => {
-    //
-    //             if (args.indexOf(col) > -1) {
-    //                 return col;
-    //             } else {
-    //                 let zeizaResponse = "I don't recognize that color";
-    //                 return zeizaResponse;
-    //             }
-    //
-    //         });
-    //
-    //         let data = {
-    //             type: "changeFontColor",
-    //             col
-    //         };
-    //
-    //         socket.emit("zeizaCommand", data);
-    //
-    //     }
-    // }, // END CHANGEBG OBJ
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    // {
-    //     name: 'changeWidth',
-    //
-    //     variations: [
-    //         'change my width',
-    //         'make user width',
-    //         "change user's width",
-    //         "change width of user",
-    //         "update width of user",
-    //         'update width of zeiza',
-    //         'change her width',
-    //         'make computer width',
-    //         "set computer's width",
-    //         "change zeiza's width",
-    //         "change width of zeiza",
-    //         "update width of zeiza"
-    //     ],
-    //
-    //     validArguments: [
-    //         'aqua', 'black', 'blue', 'fuchsia', 'grey', 'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'light grey', 'crimson', 'salmon'
-    //     ],
-    //
-    //     handler(text, variations, argument, socket) {
-    //         let col = argument;
-    //
-    //         var args = text.replace(variations, '');
-    //
-    //         this.validArguments.some(col => {
-    //
-    //             if (args.indexOf(col) > -1) {
-    //                 return col;
-    //             } else {
-    //                 let zeizaResponse = "That's not a real width value";
-    //                 return zeizaResponse;
-    //             }
-    //
-    //         });
-    //
-    //         let data = {
-    //             type: "changeFontColor",
-    //             col
-    //         };
-    //
-    //         socket.emit("zeizaCommand", data);
-    //
-    //     }
-    // }, // END CHANGEBG OBJ
+
+    {
+        name: 'fadeText',
+
+        variations: [
+            'fade',
+            'decrease opacity',
+            'make text disappear',
+            'make text invisible'
+        ],
+
+        validArguments: [
+            'fade'
+        ],
+
+        handler(text, variations, argument, socket) {
+            let col = argument;
+
+            var args = text.replace(variations, '');
+
+            this.validArguments.some(col => {
+
+                if (args.indexOf(col) > -1) {
+                    return col;
+                } else {
+                    let zeizaResponse = "I don't recognize that command";
+                    return zeizaResponse;
+                }
+
+            });
+
+            let data = {
+                type: "fadeText",
+                col
+            };
+
+            socket.emit("zeizaCommand", data);
+
+        }
+    }, // END CHANGEBG OBJ
+
+
+
+
+
+
+    {
+        name: 'bringBackText',
+
+        variations: [
+            'bring back text',
+            'increase opacity',
+            'make text appear',
+            'make text visible',
+            'bring back the text',
+            'bring back the heading',
+            'come back'
+        ],
+
+        validArguments: [
+            'bring back text'
+        ],
+
+        handler(text, variations, argument, socket) {
+            let col = argument;
+
+            var args = text.replace(variations, '');
+
+            this.validArguments.some(col => {
+
+                if (args.indexOf(col) > -1) {
+                    return col;
+                } else {
+                    let zeizaResponse = "I don't recognize that command";
+                    return zeizaResponse;
+                }
+
+            });
+
+            let data = {
+                type: "bringBackText",
+                col
+            };
+
+            socket.emit("zeizaCommand", data);
+
+        }
+    }, // END CHANGEBG OBJ
+
+
+
+
+
+
+
+
+    {
+        name: 'changeOpacity',
+
+        variations: [
+            'change opacity',
+            'update opacity',
+            'make the opacity',
+            'update the opacity',
+            'change the opacity',
+            'make text more opaque'
+        ],
+
+        validArguments: [
+            0, .1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1
+        ],
+
+        handler(text, variations, argument, socket) {
+            let col = argument;
+
+
+            var args = text.replace(variations, '');
+            console.log("ARGS: ", args);
+
+            this.validArguments.some(col => {
+
+                if (args.indexOf(col) > -1) {
+                    console.log("COL: ", col);
+                    return col;
+                } else {
+                    let zeizaResponse = "I don't recognize that command";
+                    return zeizaResponse;
+                }
+
+            });
+
+            let data = {
+                type: "changeOpacity",
+                col
+            };
+
+            console.log("DATA: ", data);
+            socket.emit("zeizaCommand", data);
+
+        }
+    }, // END CHANGEBG OBJ
+
+
+
+
+
+
+
+
+
+    {
+        name: 'changePadding',
+
+        variations: [
+            'change padding',
+            'update padding',
+            'make the padding',
+            'update the padding',
+            'change the padding',
+            'add more padding',
+            'decrease padding',
+            'make less padding'
+        ],
+
+        validArguments: [
+            0, .1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1
+        ],
+
+        handler(text, variations, argument, socket) {
+            let col = argument;
+
+
+            var args = text.replace(variations, '');
+            console.log("ARGS: ", args);
+
+            this.validArguments.some(col => {
+
+                if (args.indexOf(col) > -1) {
+                    console.log("COL: ", col);
+                    return col;
+                } else {
+                    let zeizaResponse = "I don't recognize that command";
+                    return zeizaResponse;
+                }
+
+            });
+
+            let data = {
+                type: "changeOpacity",
+                col
+            };
+
+            console.log("DATA: ", data);
+            socket.emit("zeizaCommand", data);
+
+        }
+    } // END CHANGEBG OBJ
+
 ];
 
 
