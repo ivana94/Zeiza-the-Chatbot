@@ -3,11 +3,9 @@ import axios from 'axios';
 import { socket } from './socket'
 import Zeiza from './zeiza'
 import Result from './results'
+import Intro from './intro'
 import RecordButton from './button'
-
 import { displayMostRecentUserComment, displayMostRecentAIResponse } from './actions';
-
-// IMPORT STORE BECAUSE STORE HAS THE DISPATCH METHOD
 import { store } from './start';
 
 
@@ -18,6 +16,9 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+
+        this.handleClick = this.handleClick.bind(this);
+
     }
 
 
@@ -60,6 +61,17 @@ export default class App extends React.Component {
                 let last = e.results.length - 1;
                 text = e.results[last][0].transcript;
 
+                if (text == "start demo") {
+
+                    this.setState({
+                        showIntroComponent: true,
+                    });
+
+                    recognition.stop();
+                    return;
+
+                }
+
                 store.dispatch(displayMostRecentUserComment(text))
 
                 console.log('Confidence: ' + e.results[0][0].confidence);
@@ -75,9 +87,9 @@ export default class App extends React.Component {
                 return;
 			}
 
-            recognition.onend = function() {
-                recognition.start();
-            }
+            // recognition.onend = function() {
+            //     recognition.start();
+            // }
 
 
 
@@ -127,6 +139,7 @@ export default class App extends React.Component {
             <div>
 
                 <button className="RecordButton" onClick = { () => this.handleClick() } ><h1 className = "zeiza-main-tag">Zeiza</h1></button>
+                {this.state.showIntroComponent ? <Intro /> : null}
                 <Result />
             </div>
         ) // END RETURN

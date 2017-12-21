@@ -15,6 +15,7 @@ button {
     margin: 0 100%;
     background: none;
     border-bottom: 1px solid black;
+    transition: spin 1s ease-in-out;
 }
 
 .user {
@@ -42,4 +43,57 @@ button {
     padding: 20px 0 0 30px;
     width: 50%;
     border-radius: 50px;
+}
+
+/* @-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+} */
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+.intro {
+    width: 100%;
+    margin-top: -650px;
+    font-family: "Helvetica Neue";
+    font-size: 32px;
+    font-weight: 300;
+    -webkit-animation: fadein 2s;
+}
+
+.first {
+    margin-top: 500px;
+    margin-left: 45%;
+    margin-right: 50%;
+    font-size: 50px;
+    font-weight: 500;
+}
+
+.second {
+    margin: 20px 25% 0 25%;
+    font-weight: 100;
+}
+
+.third {
+    margin: 20px 25% 0 25%;
+    font-weight: 100;
+}
+
+.fourth {
+    margin: 20px 25% 0 25%;
+    font-weight: 500;
+}
+
+
+
+
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }

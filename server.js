@@ -276,6 +276,11 @@ io.on('connection', (socket) => {
         var userTextToSendToAI = text.text;
         console.log("TEXT: ", userTextToSendToAI);
 
+        // RUN THIS CODE IF "BEGIN DEMO" IS SAID
+        if (userTextToSendToAI == "Begin demo") {
+            console.log("some code to execute");
+        }
+
         // RETURNS ARRAY IN WHICH EACH WORD OF COMMENT IS AN ELEMENT IN THE ARRAY
         var utterance = userTextToSendToAI.toLowerCase();
 

@@ -44,7 +44,6 @@ function getSocket() {
             } else if (type == 'changeFontFamily') {
                 document.querySelector(".zeiza-main-tag").style.fontFamily = arg;
             } else if (type == 'changeFontColor') {
-                console.log("arg in here :", arg);
                 document.querySelector(".zeiza-main-tag").style.color = arg;
                 document.querySelector(".messages").style.color = arg;
                 document.querySelector(".zeiza").style.color = arg;

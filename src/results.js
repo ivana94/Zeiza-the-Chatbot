@@ -16,7 +16,7 @@ class Result extends React.Component {
     }
 
     componentDidMount() {
-      this.scrollToBottom();
+        this.scrollToBottom();
     }
 
     componentDidUpdate() {
