@@ -35,6 +35,23 @@ function getSocket() {
 
         });
 
+        socket.on('zeizaCommand', data => {
+            var type = data.type;
+            var arg = data.col;
+
+            if (type == 'changeBg') {
+                document.body.style.background = arg;
+            } else if (type == 'changeFontFamily') {
+                document.querySelector(".zeiza-main-tag").style.fontFamily = arg;
+            } else if (type == 'changeFontColor') {
+                console.log("arg in here :", arg);
+                document.querySelector(".zeiza-main-tag").style.color = arg;
+                document.querySelector(".messages").style.color = arg;
+                document.querySelector(".zeiza").style.color = arg;
+            }
+
+        });
+
 
 
     }

@@ -270,6 +270,7 @@ io.on('connection', (socket) => {
     socket.on("userAudio", text => {
 
         let zeizaResponse;
+        let checkForZeizaResponse;
 
         // CAPTURE WHAT THE USER JUST SAID IN A VAR TEXT
         var userTextToSendToAI = text.text;
@@ -280,7 +281,6 @@ io.on('connection', (socket) => {
 
 
         zc.forEach(kc => {
-
             // KC = EVERY KEY IN KNOWNCOMMANDS ARR
 
             kc.variations.forEach(variation => {
@@ -289,43 +289,54 @@ io.on('connection', (socket) => {
 
                 kc.validArguments.forEach(argument => {
 
-                    if (utterance.indexOf(variation) > -1 && utterance.indexOf(argument) > -1) {
+                    if (!Number.isInteger(argument)) {
+                        var arg = argument.toLowerCase();
+                    } else {
+                        var arg = argument;
+                    }
 
-                        // zc.handler(utterance, variation);
-                        kc["handler"](utterance, variation, argument);
-                        // (kc.variation.parse || kc.parse)(utterance, variation);
+                    if (utterance.indexOf(variation) > -1 && utterance.indexOf(arg) > -1) {
+                        // console.log("utterance: ", utterance);
+                        // console.log("variation: ", variation);
+                        // console.log("arg: ", arg);
+                        kc["handler"](utterance, variation, arg, socket);
+                        checkForZeizaResponse = true;
                     }
                 }); // END COLOR FOR EACH
+
             }); // END VARIATION FOR EACH
 
-            // extract args and execute
-            // emit message to zeiza
-        });
+        }); // END ZEIZACOMMANDS FOR EACH
 
 
 
 
-        // });
 
 
-
-
-        // GET REPLY FROM AI API (DIALOGFLOW)
-        var AIReq = apiai.textRequest(userTextToSendToAI, {
-            sessionId: secret.sessionId
-        });
-
-        AIReq.on('response', (response) => {
-            zeizaResponse = response.result.fulfillment.speech;
-            console.log("AITEXT: ", zeizaResponse);
+        if (checkForZeizaResponse) {
+            zeizaResponse = "Done";
             socket.emit('zeizaResponse', zeizaResponse);
-        });
 
-        AIReq.on('error', (error) => {
-            console.log(error);
-        });
+            // ONLY PING AI IF USER'S REQUEST CAN'T BE HANDLED BY APP
+        } else {
+            // GET REPLY FROM AI API (DIALOGFLOW)
+            var AIReq = apiai.textRequest(userTextToSendToAI, {
+                sessionId: secret.sessionId
+            });
 
-        AIReq.end();
+            AIReq.on('response', (response) => {
+                zeizaResponse = response.result.fulfillment.speech;
+                console.log("AITEXT: ", zeizaResponse);
+                socket.emit('zeizaResponse', zeizaResponse);
+            });
+
+            AIReq.on('error', (error) => {
+                console.log(error);
+            });
+
+            AIReq.end();
+        }
+
 
 
     });

@@ -4,14 +4,8 @@
 
 button {
     border: none;
-}
-
-button {
     cursor: pointer;
-}
-
-.zeiza-main-img {
-    background-image: url("zeiza.png");
+    background: none;
 }
 
 .zeiza-main-tag {
@@ -19,18 +13,33 @@ button {
     font-weight: 100;
     font-size: 194px;
     margin: 0 100%;
+    background: none;
+    border-bottom: 1px solid black;
 }
 
 .user {
     background: aliceblue;
-    margin: 10px 30px;
-
+    font-family: "Helvetica Neue";
+    font-size: 18px;
+    font-weight: 300;
+    margin: 0 35%;
+    height: 40px;
+    padding: 20px 0 0 30px;
+    width: 50%;
+    border-radius: 50px;
 }
 
 .zeiza {
-    color: red;
     font-weight: bold;
+    font-family: "Helvetica Neue";
+    font-size: 18px;
+    font-weight: 300;
     background: lightgray;
-    margin: 10px 50%;
+    margin: 10px 100%;
     width: 100%;
+    margin: 10px 100px;
+    height: 40px;
+    padding: 20px 0 0 30px;
+    width: 50%;
+    border-radius: 50px;
 }
