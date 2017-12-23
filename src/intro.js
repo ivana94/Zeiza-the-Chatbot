@@ -22,20 +22,29 @@ export default class Intro extends React.Component {
             synthVoice("Hello.")
 
             setTimeout(() => {
-                synthVoice("My name is Zeiza, and I am a simple talking A.I. chatbot. You can voice questions and commands at me, and I'll respond by either making a comment or taking an action.")
-
-                setTimeout(() => {
-                    synthVoice("I was created by Ivana at SPICED Academy in Berlin.")
+                synthVoice("My name is Zeiza, and I am a simple voice-powered A.I. chatbot. You can voice questions and commands at me, and I'll respond by either making a comment or taking an action.")
 
                     setTimeout(() => {
                         synthVoice("Alright, let's get going.")
-                    })
-                }, 1500)
-            }, 1500)
+
+                        setTimeout(() => {
+
+                            window.location.reload()
+
+                        }, 13000)
+                    }, 2000)
+            }, 2000)
         }, 2000);
     }
 
 
+    handleClick() {
+
+        this.setState({
+            showIntroComponent: false,
+        });
+
+    }
 
 
 
@@ -51,9 +60,9 @@ export default class Intro extends React.Component {
 
             <p className = "first">Hello.</p>
 
-            <p className = "second">My name is Zeiza, and I am a simple talking AI chatbot. You can voice questions and commands at me, and I'll respond by making comment or taking an action.</p>
+            <p className = "second">My name is Zeiza, and I am a simple voice-powered A.I. chatbot.</p>
 
-            <p className = "third">I was created by Ivana at SPICED Academy in Berlin.</p>
+            <p className = "third">You can voice questions and commands at me, and I'll respond by either making a comment or taking an action.</p>
 
             <p className = "fourth">Alright, let's get going.</p>
 

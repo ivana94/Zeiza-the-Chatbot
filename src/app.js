@@ -4,6 +4,7 @@ import { socket } from './socket'
 import Zeiza from './zeiza'
 import Result from './results'
 import Intro from './intro'
+import Outro from './outro'
 import RecordButton from './button'
 import { displayMostRecentUserComment, displayMostRecentAIResponse } from './actions';
 import { store } from './start';
@@ -61,10 +62,21 @@ export default class App extends React.Component {
                 let last = e.results.length - 1;
                 text = e.results[last][0].transcript;
 
-                if (text == "start demo") {
+                if (text == "start demo" || text == "start timer") {
 
                     this.setState({
                         showIntroComponent: true,
+                    });
+
+                    recognition.stop();
+                    return;
+
+                }
+
+                if (text == "end demo" || text == "bend timer" || text == "and the demo" || text == "and a demo" || text == "and demo" || text == "and Dumber") {
+
+                    this.setState({
+                        showOutroComponent: true,
                     });
 
                     recognition.stop();
@@ -139,7 +151,8 @@ export default class App extends React.Component {
             <div>
 
                 <button className="RecordButton" onClick = { () => this.handleClick() } ><h1 className = "zeiza-main-tag">Zeiza</h1></button>
-                {this.state.showIntroComponent ? <Intro /> : null}
+                { this.state.showIntroComponent ? <Intro /> : null }
+                { this.state.showOutroComponent ? <Outro /> : null }
                 <Result />
             </div>
         ) // END RETURN

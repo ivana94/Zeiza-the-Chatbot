@@ -276,10 +276,6 @@ io.on('connection', (socket) => {
         var userTextToSendToAI = text.text;
         console.log("TEXT: ", userTextToSendToAI);
 
-        // RUN THIS CODE IF "BEGIN DEMO" IS SAID
-        if (userTextToSendToAI == "Begin demo") {
-            console.log("some code to execute");
-        }
 
         // RETURNS ARRAY IN WHICH EACH WORD OF COMMENT IS AN ELEMENT IN THE ARRAY
         var utterance = userTextToSendToAI.toLowerCase();
@@ -293,27 +289,38 @@ io.on('connection', (socket) => {
 
                 // VARIATION == "CHANGE BACKGROUND COLOUR" ETC
 
-                kc.validArguments.forEach(argument => {
-
-                    if (!Number.isInteger(argument)) {
-
-                        if (argument > 0 && argument < 1) {
-                            arg = argument;
-                        } else {
-                            arg = argument.toLowerCase();
-                        }
-                    } else {
-                        arg = argument;
+                if (!kc.validArguments) {
+                    console.log("me???", utterance.indexOf(variation));
+                    if (utterance.indexOf(variation) > -1) {
+                        console.log("variation: ", variation);
+                        kc["handler"](utterance, variation, socket);
+                        checkForZeizaResponse = true;
                     }
+                } else {
+                    kc.validArguments.forEach(argument => {
 
-                    if (utterance.indexOf(variation) > -1 && utterance.indexOf(arg) > -1) {
+                        if (!Number.isInteger(argument)) {
+
+                            if (argument > 0 && argument < 1) {
+                                arg = argument;
+                            } else {
+                                arg = argument.toLowerCase();
+                            }
+                        } else {
+                            arg = argument;
+                        }
+
+                        if (utterance.indexOf(variation) > -1 && utterance.indexOf(arg) > -1) {
                         // console.log("utterance: ", utterance);
                         // console.log("variation: ", variation);
                         // console.log("arg: ", arg);
-                        kc["handler"](utterance, variation, arg, socket);
-                        checkForZeizaResponse = true;
-                    }
-                }); // END COLOR FOR EACH
+                            kc["handler"](utterance, variation, arg, socket);
+                            checkForZeizaResponse = true;
+                        }
+                    }); // END COLOR FOR EACH
+
+                }
+
 
             }); // END VARIATION FOR EACH
 
@@ -353,36 +360,3 @@ io.on('connection', (socket) => {
     });
 
 });
-
-// var knownCommands = [
-//
-//     {
-//         name: 'changeBg',
-//         variation: [
-//             'change background color',
-//             'make background color'
-//         ],
-//
-//         validArguments: [
-//             'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'lightgray', 'crimson', 'salmon'
-//         ],
-//
-//         handler(text, variation) {
-//
-//             var args = text.replace(variation, '');
-//             var argument;
-//             this.validArguments.some(arg => {
-//
-//                 if (args.indexOf(argument) > -1) {
-//                     return argument = arg;
-//                 } else {
-//                     zeizaResponse = "I don't recognize that color"
-//                     return zeizaResponse;
-//                 }
-//
-//             })
-//
-//             document.body.style.background = argument;
-//         }
-//     }
-// ]

@@ -25,7 +25,6 @@ var knownCommands = [
             var hex;
 
             var args = text.replace(variations, '');
-            console.log("ARGS IN ZCZCZCZCZCZC: ", args);
 
 
             this.validArguments.some(col => {
@@ -59,7 +58,6 @@ var knownCommands = [
                 col
             };
 
-            console.log("DATA: ", data);
             socket.emit("zeizaCommand", data);
 
         }
@@ -122,7 +120,6 @@ var knownCommands = [
                 col
             };
 
-            console.log("col", col);
             socket.emit("zeizaCommand", data);
 
         }
@@ -163,8 +160,6 @@ var knownCommands = [
             var hex;
 
             var args = text.replace(variations, '');
-            console.log("ARGS: ", col);
-
 
 
             this.validArguments.some(col => {
@@ -322,12 +317,10 @@ var knownCommands = [
 
 
             var args = text.replace(variations, '');
-            console.log("ARGS: ", args);
 
             this.validArguments.some(col => {
 
                 if (args.indexOf(col) > -1) {
-                    console.log("COL: ", col);
                     return col;
                 } else {
                     let zeizaResponse = "I don't recognize that command";
@@ -341,7 +334,6 @@ var knownCommands = [
                 col
             };
 
-            console.log("DATA: ", data);
             socket.emit("zeizaCommand", data);
 
         }
@@ -369,39 +361,110 @@ var knownCommands = [
             'make less padding'
         ],
 
-        validArguments: [
-            0, .1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1
-        ],
-
-        handler(text, variations, argument, socket) {
-            let col = argument;
+        handler(text, variations, socket) {
+            let col;
 
 
             var args = text.replace(variations, '');
-            console.log("ARGS: ", args);
 
-            this.validArguments.some(col => {
+            var paddingCount = 0;
 
-                if (args.indexOf(col) > -1) {
-                    console.log("COL: ", col);
-                    return col;
-                } else {
-                    let zeizaResponse = "I don't recognize that command";
-                    return zeizaResponse;
+            for (let i = 0; i < args.length; i++) {
+
+                // CHECK IF ARGS[I] == NUMBER
+                if (args[i] % 1 === 0) {
+                    paddingCount += args[i];
                 }
+            }
 
-            });
+            var index = paddingCount.indexOf("0 ") + 3;
+            col = paddingCount.slice(index);
 
             let data = {
-                type: "changeOpacity",
+                type: "changePadding",
                 col
             };
 
-            console.log("DATA: ", data);
             socket.emit("zeizaCommand", data);
 
         }
-    } // END CHANGEBG OBJ
+    }, // END CHANGEBG OBJ
+
+
+    {
+        name: 'resetPadding',
+
+        variations: [
+            'reset padding',
+        ],
+
+        handler(text, variations, socket) {
+
+
+            let data = {
+                type: "resetPadding"
+            };
+
+            socket.emit("zeizaCommand", data);
+
+        }
+    }, // END CHANGEBG OBJ
+
+
+
+
+    {
+        name: 'space',
+
+        variations: [
+            'space'
+        ],
+
+        handler(text, variations, socket) {
+
+
+            let data = {
+                type: "space"
+            };
+
+            socket.emit("zeizaCommand", data);
+
+        }
+    }, // END CHANGEBG OBJ
+
+
+
+
+
+
+
+
+
+
+
+    {
+        name: 'hellMode',
+
+        variations: [
+            'hell'
+        ],
+
+        handler(text, variations, socket) {
+
+
+            let data = {
+                type: "hell"
+            };
+
+            socket.emit("zeizaCommand", data);
+
+        }
+    }, // END CHANGEBG OBJ
+
+
+
+
+
 
 ];
 
