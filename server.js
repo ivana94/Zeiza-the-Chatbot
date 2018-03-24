@@ -131,6 +131,8 @@ app.post("/register", (req, res) => {
         // SEND HASHED PASSWORD TO DATABASE
         db.registerUser(first, last, email, hashedPassword).then(results => {
 
+            console.log("results: ", results);
+
             req.session.user = {
                 id: results.id,
             };
@@ -290,9 +292,9 @@ io.on('connection', (socket) => {
                 // VARIATION == "CHANGE BACKGROUND COLOUR" ETC
 
                 if (!kc.validArguments) {
-                    console.log("me???", utterance.indexOf(variation));
+
                     if (utterance.indexOf(variation) > -1) {
-                        console.log("variation: ", variation);
+
                         kc["handler"](utterance, variation, socket);
                         checkForZeizaResponse = true;
                     }
@@ -311,11 +313,10 @@ io.on('connection', (socket) => {
                         }
 
                         if (utterance.indexOf(variation) > -1 && utterance.indexOf(arg) > -1) {
-                        // console.log("utterance: ", utterance);
-                        // console.log("variation: ", variation);
-                        // console.log("arg: ", arg);
+
                             kc["handler"](utterance, variation, arg, socket);
                             checkForZeizaResponse = true;
+
                         }
                     }); // END COLOR FOR EACH
 
@@ -335,7 +336,7 @@ io.on('connection', (socket) => {
             zeizaResponse = "Done";
             socket.emit('zeizaResponse', zeizaResponse);
 
-            // ONLY PING AI IF USER'S REQUEST CAN'T BE HANDLED BY APP
+            // ONLY PING DIALOGLFOW AI API IF USER'S REQUEST CAN'T BE HANDLED BY APP
         } else {
             // GET REPLY FROM AI API (DIALOGFLOW)
             var AIReq = apiai.textRequest(userTextToSendToAI, {
@@ -349,10 +350,11 @@ io.on('connection', (socket) => {
             });
 
             AIReq.on('error', (error) => {
-                console.log(error);
+                console.log('Dialogflow error ', error);
             });
 
             AIReq.end();
+
         }
 
 
