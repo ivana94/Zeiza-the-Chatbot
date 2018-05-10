@@ -8,6 +8,8 @@ import Outro from './outro'
 import RecordButton from './button'
 import { displayMostRecentUserComment, displayMostRecentAIResponse } from './actions';
 import { store } from './start';
+import { Link, BrowserRouter, Route } from 'react-router-dom';
+
 
 
 
@@ -133,7 +135,6 @@ export default class App extends React.Component {
 
     render() {
 
-
         if (!this.state) {
             return (
                 <div>Loading...</div>
@@ -150,9 +151,16 @@ export default class App extends React.Component {
         return (
             <div>
 
-                <button className="RecordButton" onClick = { () => this.handleClick() } ><h1 className = "zeiza-main-tag">Zeiza</h1></button>
-                { this.state.showIntroComponent ? <Intro /> : null }
-                { this.state.showOutroComponent ? <Outro /> : null }
+
+
+
+
+                <button className="RecordButton" onClick = { this.handleClick } >
+                    <h1 className = "zeiza-main-tag">Zeiza</h1>
+                </button>
+
+                { this.state.showIntroComponent && <Intro /> }
+                { this.state.showOutroComponent && <Outro /> }
                 <Result />
             </div>
         ) // END RETURN

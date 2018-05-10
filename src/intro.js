@@ -29,7 +29,7 @@ export default class Intro extends React.Component {
 
                         setTimeout(() => {
 
-                            window.location.reload()
+                            location.reload()
 
                         }, 13000)
                     }, 2000)

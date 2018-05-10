@@ -47,7 +47,7 @@ class Result extends React.Component {
 				<span className = "messages">{ message && listOfComments() }</span>
                 <div style = {{ float: "left", clear: "both" }}
                 ref={ el => { this.messagesEnd = el; } }>
-        </div>
+                </div>
 			</div>
 		)
 	}
