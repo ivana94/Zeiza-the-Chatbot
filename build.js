@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const plugins = [
     new webpack.DefinePlugin({
@@ -9,10 +10,13 @@ const plugins = [
 ];
 
 if (require.main == module) {
-    plugins.push(new webpack.optimize.UglifyJsPlugin({
-       compress: {
-           warnings: false
-       }
+    plugins.push(new UglifyJSPlugin({
+       uglifyOptions:{
+           compress: {
+               warnings: false,
+               booleans: true,
+           }
+   }
     }));
 }
 
@@ -22,9 +26,10 @@ const conf = {
         path: __dirname + '/public/',
         filename: 'bundle.js'
     },
+    mode: 'development',
     plugins: plugins,
     module: {
-        loaders: [{
+        rules: [{
             test:  /\.js$/,
             loader: 'babel-loader',
             query: {

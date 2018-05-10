@@ -18,18 +18,13 @@ import * as io from 'socket.io-client';
 import { socket } from './socket'
 
 // IMPORT HASH ROUTER. WE WILL USE THIS TO ROUTE USERS NOT LOGGED IN
-import { Router, Route, IndexRoute, hashHistory, browserHistory, Redirect } from 'react-router';
+import { Router, Route, IndexRoute, HashRouter, BrowserRouter, Redirect } from 'react-router-dom';
 
 // CREATE REDUX STORE AND APPLY REDUX PROMISE MIDDLEWARE
 export const store = createStore(reducer, composeWithDevTools(applyMiddleware(reduxPromise)));
 // const store = createStore(reducer, composeWithDevTools(applyMiddleware(reduxPromise)));
 
 let router;
-
-
-
-
-
 
 
 
@@ -49,7 +44,7 @@ let router;
 const notLoggedInRouter = (
 
 
-        <Router history = { hashHistory }>
+        <Router history = { HashRouter }>
             <Route path = "/" component = { Welcome }>
                 <Route path = "/login" component = { Login } />
                 <IndexRoute component = { Register } />
@@ -67,11 +62,7 @@ const loggedInRouter = (
     // WRAP ROUTER IN PROVIDER COMPONENT (FROM REDUX) AND PASS STORE TO IT AS PROP
     <Provider store = { store } >
 
-        <Router history = { browserHistory }>
-            <Route path = "/" component = { App } >
-                <IndexRoute component = { Zeiza } />
-            </Route>
-        </Router>
+        <App />
 
     </Provider>
 

@@ -8,14 +8,16 @@ button {
     background: none;
 }
 
-.zeiza-main-tag {
+button:focus {
+    outline:0;
+}
+
+h1.zeiza-main-tag {
     font-family: "Helvetica Neue", sans-serif;
     font-weight: 100;
     font-size: 194px;
-    margin: 0 100%;
     background: none;
     border-bottom: 1px solid black;
-    /* -webkit-animation: spin 2s; */
 }
 
 .user {
