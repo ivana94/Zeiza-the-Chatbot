@@ -1,5 +1,4 @@
 node_modules
-package.json
 secrets.json
 secret.json
 sync-request.json

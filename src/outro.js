@@ -11,7 +11,7 @@ export default class Outro extends React.Component {
     }
 
     componentDidMount() {
-        document.querySelector(".zeiza-main-tag").style.color = "white";
+        document.querySelector("h1.zeiza-main-tag").style.color = "white";
 
 
         setTimeout(() => {
@@ -31,13 +31,7 @@ export default class Outro extends React.Component {
     }
 
 
-    handleClick() {
 
-        this.setState({
-            showOutroComponent: false,
-        });
-
-    }
 
 
 
