@@ -2,12 +2,15 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { socket } from './socket'
+import { toggleShowIntroComponent } from './actions';
 import axios from 'axios';
+import synthVoice from '../config/synthVoice'
 
 
 
 
-export default class Intro extends React.Component {
+
+class Intro extends React.Component {
 
     constructor(props) {
         super(props);
@@ -29,27 +32,14 @@ export default class Intro extends React.Component {
 
                         setTimeout(() => {
 
-                            location.reload()
+                            document.querySelector(".zeiza-main-tag").style.color = "black";
+                            this.props.dispatch(toggleShowIntroComponent(!this.props.showIntroComponent))
 
                         }, 13000)
                     }, 2000)
             }, 2000)
         }, 2000);
     }
-
-
-    handleClick() {
-
-        this.setState({
-            showIntroComponent: false,
-        });
-
-    }
-
-
-
-
-
 
 
 
@@ -85,23 +75,12 @@ export default class Intro extends React.Component {
 
 
 
-
-
-
-
-
-
-
-function synthVoice(text) {
-
-    const synth = window.speechSynthesis;
-    const msg = new SpeechSynthesisUtterance();
-    msg.text = text;
-
-    msg.voiceURI = 'Native';
-    msg.volume = 1;
-    msg.rate = 1;
-    msg.lang = 'en-IE';
-
-    synth.speak(msg);
+const mapStateToProps = state => {
+    return {
+        showIntroComponent: state.showIntroComponent
+    }
 }
+
+
+
+export default connect(mapStateToProps)(Intro)

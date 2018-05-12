@@ -2,6 +2,7 @@ import React from 'react';
 import * as io from 'socket.io-client';
 import axios from 'axios';
 import { displayMostRecentUserComment, displayMostRecentAIResponse } from './actions';
+import synthVoice from '../config/synthVoice'
 
 // IMPORT STORE BECAUSE STORE HAS THE DISPATCH METHOD
 import { store } from './start';
@@ -95,29 +96,29 @@ function getSocket() {
 
 
 // CREATE SYNTHETIC VOICE FOR ZEIZA
-function synthVoice(text) {
-
-    // CREATE CONTEXT FOR SPEECH SYNTHESIS
-    const synth = window.speechSynthesis;
-    const msg = new SpeechSynthesisUtterance();
-    var voices = synth.getVoices();
-
-    // window.speechSynthesis.onvoiceschanged = function() {
-    //     voices = window.speechSynthesis.getVoices();
-    //     console.log("VOICES: ", voices);
-    // };
-
-    // DEFINE WHAT TEXT ZEIZA WILL BE SPEAKING
-    msg.text = text;
-
-    // CUSTOMIZE ZEIZA'S VOICE
-    msg.voiceURI = 'Native';
-    msg.volume = 1;
-    msg.rate = 1;
-    msg.lang = 'en-IE';
-
-    synth.speak(msg);
-}
+// function synthVoice(text) {
+//
+//     // CREATE CONTEXT FOR SPEECH SYNTHESIS
+//     const synth = window.speechSynthesis;
+//     const msg = new SpeechSynthesisUtterance();
+//     var voices = synth.getVoices();
+//
+//     // window.speechSynthesis.onvoiceschanged = function() {
+//     //     voices = window.speechSynthesis.getVoices();
+//     //     console.log("VOICES: ", voices);
+//     // };
+//
+//     // DEFINE WHAT TEXT ZEIZA WILL BE SPEAKING
+//     msg.text = text;
+//
+//     // CUSTOMIZE ZEIZA'S VOICE
+//     msg.voiceURI = 'Native';
+//     msg.volume = 1;
+//     msg.rate = 1;
+//     msg.lang = 'en-IE';
+//
+//     synth.speak(msg);
+// }
 
 
 export { getSocket as socket } ;

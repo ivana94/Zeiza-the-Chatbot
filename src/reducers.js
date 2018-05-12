@@ -31,6 +31,15 @@ export default function reducer(state = {}, action) {
     }
 
 
+    if (action.type == "TOGGLE_INTRO_COMPONENT") {
+
+        state = Object.assign({}, state, {
+            showIntroComponent: action.showIntroComponent
+        });
+        
+    }
+
+
 
 
     console.log("I AM STATE IN REDUCER: ", state);

@@ -6,14 +6,15 @@ import Result from './results'
 import Intro from './intro'
 import Outro from './outro'
 import RecordButton from './button'
-import { displayMostRecentUserComment, displayMostRecentAIResponse } from './actions';
+import { displayMostRecentUserComment, displayMostRecentAIResponse, toggleShowIntroComponent } from './actions';
 import { store } from './start';
+import { connect } from "react-redux";
 import { Link, BrowserRouter, Route } from 'react-router-dom';
 
 
 
 
-export default class App extends React.Component {
+class App extends React.Component {
 
 
     constructor(props) {
@@ -64,11 +65,9 @@ export default class App extends React.Component {
                 let last = e.results.length - 1;
                 text = e.results[last][0].transcript;
 
-                if (text == "start demo" || text == "start timer") {
+                if (text == "start demo" || text == "start timer" || text == "latimer" ) {
 
-                    this.setState({
-                        showIntroComponent: true,
-                    });
+                    this.props.dispatch(toggleShowIntroComponent(!this.props.showIntroComponent))
 
                     recognition.stop();
                     return;
@@ -151,17 +150,17 @@ export default class App extends React.Component {
 
 
         return (
-            <div>
+            <div className = "zeiza-container">
 
 
 
 
 
-                <button className="RecordButton" onClick = { this.handleClick } >
+                <button className="record-button" onClick = { this.handleClick } >
                     <h1 className = "zeiza-main-tag">Zeiza</h1>
                 </button>
 
-                { this.state.showIntroComponent && <Intro /> }
+                { this.props.showIntroComponent && <Intro /> }
                 { this.state.showOutroComponent && <Outro /> }
                 <Result />
             </div>
@@ -170,3 +169,16 @@ export default class App extends React.Component {
     } // END RENDER
 
 } // END COMPONENT
+
+
+
+
+const mapStateToProps = state => {
+    return {
+        showIntroComponent: state.showIntroComponent
+    }
+}
+
+
+
+export default connect(mapStateToProps)(App)
