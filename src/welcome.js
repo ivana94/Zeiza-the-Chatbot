@@ -1,6 +1,5 @@
 import React from 'react';
 import Register from './register';
-import { Link } from 'react-router';
 
 
 export default class Welcome extends React.Component {
@@ -16,10 +15,9 @@ export default class Welcome extends React.Component {
         return (
             <div>
                 <h1>Zeiza the Chatbot</h1>
-                { this.props.children }
             </div>
         )
-        
+
     }
 
 

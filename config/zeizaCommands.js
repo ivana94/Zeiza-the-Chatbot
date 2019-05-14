@@ -17,7 +17,7 @@ var knownCommands = [
         ],
 
         validArguments: [
-            'aqua', 'black', 'blue', 'fuchsia', 'grey', 'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'light grey', 'crimson', 'salmon', "pink"
+            'aqua', 'black', 'tomato', 'blue', 'fuchsia', 'grey', 'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'light grey', 'crimson', 'salmon', "pink"
         ],
 
         handler(text, variations, argument, socket) {
@@ -95,7 +95,7 @@ var knownCommands = [
         ],
 
         validArguments: [
-            'sans-serif', 'helvetica beue', 'arial', 'comic sans ms', 'cursive', 'gadget', 'times new roman', 'times', 'serif', 'georgia', 'book antiqua', 'palatino', 'palatino linotype', 'helvetica', 'charcoal', 'impact', 'lucida sans unicode', 'lucida grande', 'tahoma', 'verdana'
+            'sans-serif', 'helvetica neue', 'arial', 'comic sans ms', 'cursive', 'gadget', 'times new roman', 'times', 'serif', 'georgia', 'book antiqua', 'palatino', 'palatino linotype', 'helvetica', 'charcoal', 'impact', 'lucida sans unicode', 'lucida grande', 'tahoma', 'verdana'
         ],
 
         handler(text, variations, argument, socket) {
@@ -152,7 +152,7 @@ var knownCommands = [
         ],
 
         validArguments: [
-            'aqua', 'black', 'blue', 'fuchsia', 'grey', 'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'light grey', 'crimson', 'salmon', "pink", "a", "b", "c", "d", "e", "f", 1, 2, 3, 4, 5, 6, 7, 8, 9
+            'aqua', 'black', 'blue', 'fuchsia', 'grey', 'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'violet', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'light grey', 'crimson', 'salmon', "pink", "a", "b", "c", "d", "e", "f", 1, 2, 3, 4, 5, 6, 7, 8, 9
         ],
 
         handler(text, variations, argument, socket) {

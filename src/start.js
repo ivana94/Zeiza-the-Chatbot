@@ -44,12 +44,9 @@ let router;
 const notLoggedInRouter = (
 
 
-        <Router history = { HashRouter }>
-            <Route path = "/" component = { Welcome }>
-                <Route path = "/login" component = { Login } />
-                <IndexRoute component = { Register } />
-          	</Route>
-        </Router>
+        <HashRouter>
+            <Route exact path = "/" component = { Register } />
+        </HashRouter>
 
 
 )

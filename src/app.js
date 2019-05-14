@@ -6,7 +6,7 @@ import Result from './results'
 import Intro from './intro'
 import Outro from './outro'
 import RecordButton from './button'
-import { displayMostRecentUserComment, displayMostRecentAIResponse, toggleShowIntroComponent } from './actions';
+import { displayMostRecentUserComment, displayMostRecentAIResponse, toggleShowIntroComponent, toggleShowOutroComponent } from './actions';
 import { store } from './start';
 import { connect } from "react-redux";
 import { Link, BrowserRouter, Route } from 'react-router-dom';
@@ -65,24 +65,19 @@ class App extends React.Component {
                 let last = e.results.length - 1;
                 text = e.results[last][0].transcript;
 
+
+                // START INTRO SEQUENCE WHEN USER SAYS "START DEMO"
                 if (text == "start demo" || text == "start timer" || text == "latimer" ) {
-
                     this.props.dispatch(toggleShowIntroComponent(!this.props.showIntroComponent))
-
                     recognition.stop();
                     return;
-
                 }
 
+                // START OUTRO SEQUENCE WHEN USER SAYS "START DEMO"
                 if (text == "end demo" || text == "bend timer" || text == "and the demo" || text == "and a demo" || text == "and demo" || text == "and Dumber") {
-
-                    this.setState({
-                        showOutroComponent: true,
-                    });
-
+                    this.props.dispatch(toggleShowOutroComponent(!this.props.showOutroComponent))
                     recognition.stop();
                     return;
-
                 }
 
                 store.dispatch(displayMostRecentUserComment(text))
@@ -175,7 +170,8 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        showIntroComponent: state.showIntroComponent
+        showIntroComponent: state.showIntroComponent,
+        showOutroComponent: state.showOutroComponent
     }
 }
 

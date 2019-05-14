@@ -62,3 +62,7 @@ export const displayMostRecentAIResponse = zeizaResponse => {
 export const toggleShowIntroComponent = showIntroComponent => {
     return { type: "TOGGLE_INTRO_COMPONENT", showIntroComponent };
 }
+
+export const toggleShowOutroComponent = showOutroComponent => {
+    return { type: "TOGGLE_OUTRO_COMPONENT", showOutroComponent };
+}

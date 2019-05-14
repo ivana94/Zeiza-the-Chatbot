@@ -77,8 +77,8 @@ function getSocket() {
             } else if (type == "hell") {
                 console.log("hell");
                 document.body.style.background = "url('https://vignette.wikia.nocookie.net/fantendo/images/4/49/Realistic-fire-animated-transparent-gif.gif/revision/latest?cb=20150324012556')";
-                document.querySelector(".messages").style.background = "red";
-                document.querySelector(".zeiza").style.background = "red";
+                // document.querySelector(".messages").style.background = "red";
+                // document.querySelector(".zeiza").style.background = "red";
             }
 
         });
