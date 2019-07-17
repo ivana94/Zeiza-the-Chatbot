@@ -53,3 +53,16 @@ export const displayMostRecentAIResponse = zeizaResponse => {
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////// END PUSH USER / AI COMMENTS TO STATE ////////////////
 ////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+export const toggleShowIntroComponent = showIntroComponent => {
+    return { type: "TOGGLE_INTRO_COMPONENT", showIntroComponent };
+}
+
+export const toggleShowOutroComponent = showOutroComponent => {
+    return { type: "TOGGLE_OUTRO_COMPONENT", showOutroComponent };
+}

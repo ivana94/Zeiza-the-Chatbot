@@ -2,14 +2,19 @@
     margin: 0;
 }
 
-button {
+
+button.record-button {
     border: none;
     cursor: pointer;
     background: none;
 }
 
-button:focus {
+button.record-button:focus {
     outline:0;
+}
+
+div.zeiza-container {
+    text-align: center;
 }
 
 h1.zeiza-main-tag {
@@ -17,10 +22,10 @@ h1.zeiza-main-tag {
     font-weight: 100;
     font-size: 194px;
     background: none;
-    border-bottom: 1px solid black;
+/*     -webkit-animation: spin 2s; */
 }
 
-.user {
+div.user {
     background: aliceblue;
     font-family: "Helvetica Neue";
     font-size: 18px;
@@ -30,9 +35,10 @@ h1.zeiza-main-tag {
     padding: 20px 0 0 30px;
     width: 50%;
     border-radius: 50px;
+    text-align: left;
 }
 
-.zeiza {
+div.zeiza {
     font-weight: bold;
     font-family: "Helvetica Neue";
     font-size: 18px;
@@ -45,11 +51,19 @@ h1.zeiza-main-tag {
     padding: 20px 0 0 30px;
     width: 50%;
     border-radius: 50px;
+    text-align: left;
 }
 
 @-webkit-keyframes spin {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
 }
 
 
@@ -88,121 +102,28 @@ h1.zeiza-main-tag {
 
 
 
-@-webkit-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+@keyframes fadein {
+
+    from {
+     opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
 }
 
-@-webkit-keyframes fadeout {
-    from { opacity: 1; }
-    to   { opacity: 0; }
-}
+@keyframes fadeout {
 
-.fire {
-    background-image: url("https://vignette.wikia.nocookie.net/fantendo/images/4/49/Realistic-fire-animated-transparent-gif.gif/revision/latest?cb=20150324012556")
-}
+    from {
+        opacity: 1;
+    }
 
-.spiced {
-    display: none;
-    -webkit-animation: fadein 2s;
-}
+    to {
+        opacity: 0;
+    }
 
-* {
-    margin: 0;
-}
-
-button {
-    border: none;
-    cursor: pointer;
-    background: none;
-}
-
-.zeiza-main-tag {
-    font-family: "Helvetica Neue", sans-serif;
-    font-weight: 100;
-    font-size: 194px;
-    margin: 0 100%;
-    background: none;
-    border-bottom: 1px solid black;
-    /* -webkit-animation: spin 2s; */
-}
-
-.user {
-    background: aliceblue;
-    font-family: "Helvetica Neue";
-    font-size: 18px;
-    font-weight: 300;
-    margin: 0 35%;
-    height: 40px;
-    padding: 20px 0 0 30px;
-    width: 50%;
-    border-radius: 50px;
-}
-
-.zeiza {
-    font-weight: bold;
-    font-family: "Helvetica Neue";
-    font-size: 18px;
-    font-weight: 300;
-    background: lightgray;
-    margin: 10px 100%;
-    width: 100%;
-    margin: 10px 100px;
-    height: 40px;
-    padding: 20px 0 0 30px;
-    width: 50%;
-    border-radius: 50px;
-}
-
-@-webkit-keyframes spin {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
-}
-
-
-.intro {
-    width: 100%;
-    margin-top: -650px;
-    font-family: "Helvetica Neue";
-    font-size: 32px;
-    font-weight: 300;
-    -webkit-animation: fadein 2s;
-}
-
-.first {
-    margin-top: 500px;
-    margin-left: 45%;
-    margin-right: 50%;
-    font-size: 50px;
-    font-weight: 500;
-}
-
-.second {
-    margin: 20px 25% 0 25%;
-    font-weight: 100;
-}
-
-.third {
-    margin: 20px 25% 0 25%;
-    font-weight: 100;
-}
-
-.fourth {
-    margin: 20px 25% 0 25%;
-    font-weight: 500;
-}
-
-
-
-
-@-webkit-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-@-webkit-keyframes fadeout {
-    from { opacity: 1; }
-    to   { opacity: 0; }
 }
 
 .fire {
@@ -211,15 +132,5 @@ button {
 
 .spiced {
     display: none;
-    width: 50%;
-    margin: 50px 15% 0 15%;
     -webkit-animation: fadein 2s;
-}
-
-.first-outro {
-    margin-top: 500px;
-    margin-left: 15%;
-    margin-right: 15%;
-    font-size: 50px;
-    font-weight: 500;
 }

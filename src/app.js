@@ -6,14 +6,15 @@ import Result from './results'
 import Intro from './intro'
 import Outro from './outro'
 import RecordButton from './button'
-import { displayMostRecentUserComment, displayMostRecentAIResponse } from './actions';
+import { displayMostRecentUserComment, displayMostRecentAIResponse, toggleShowIntroComponent, toggleShowOutroComponent } from './actions';
 import { store } from './start';
+import { connect } from "react-redux";
 import { Link, BrowserRouter, Route } from 'react-router-dom';
 
 
 
 
-export default class App extends React.Component {
+class App extends React.Component {
 
 
     constructor(props) {
@@ -64,26 +65,19 @@ export default class App extends React.Component {
                 let last = e.results.length - 1;
                 text = e.results[last][0].transcript;
 
-                if (text == "start demo" || text == "start timer") {
 
-                    this.setState({
-                        showIntroComponent: true,
-                    });
-
+                // START INTRO SEQUENCE WHEN USER SAYS "START DEMO"
+                if (text == "start demo" || text == "start timer" || text == "latimer" ) {
+                    this.props.dispatch(toggleShowIntroComponent(!this.props.showIntroComponent))
                     recognition.stop();
                     return;
-
                 }
 
+                // START OUTRO SEQUENCE WHEN USER SAYS "START DEMO"
                 if (text == "end demo" || text == "bend timer" || text == "and the demo" || text == "and a demo" || text == "and demo" || text == "and Dumber") {
-
-                    this.setState({
-                        showOutroComponent: true,
-                    });
-
+                    this.props.dispatch(toggleShowOutroComponent(!this.props.showOutroComponent))
                     recognition.stop();
                     return;
-
                 }
 
                 store.dispatch(displayMostRecentUserComment(text))
@@ -148,18 +142,20 @@ export default class App extends React.Component {
 
 
 
+
+
         return (
-            <div>
+            <div className = "zeiza-container">
 
 
 
 
 
-                <button className="RecordButton" onClick = { this.handleClick } >
+                <button className="record-button" onClick = { this.handleClick } >
                     <h1 className = "zeiza-main-tag">Zeiza</h1>
                 </button>
 
-                { this.state.showIntroComponent && <Intro /> }
+                { this.props.showIntroComponent && <Intro /> }
                 { this.state.showOutroComponent && <Outro /> }
                 <Result />
             </div>
@@ -168,3 +164,17 @@ export default class App extends React.Component {
     } // END RENDER
 
 } // END COMPONENT
+
+
+
+
+const mapStateToProps = state => {
+    return {
+        showIntroComponent: state.showIntroComponent,
+        showOutroComponent: state.showOutroComponent
+    }
+}
+
+
+
+export default connect(mapStateToProps)(App)
